@@ -75,14 +75,6 @@ public class CardGameGUI extends JFrame implements ActionListener {
     private JLabel lossMsg;
     
     private JLabel rulesMsg;
-    private JLabel rules2Msg;
-    private JLabel rules3Msg;
-    private JLabel rules4Msg;
-    
-    private JLabel points1;
-    private JLabel points2;
-    private JLabel points3;
-    private JLabel points4;
     
     /** The coordinates of the card displays. */
     private Point[] cardCoords;
@@ -217,7 +209,8 @@ public class CardGameGUI extends JFrame implements ActionListener {
                                         100, 30);
         restartButton.addActionListener(this);
 
-        statusMsg = new JLabel(board.deckSize() + " undealt cards remain.");
+        statusMsg = new JLabel(
+    board.deckSize() + " undealt cards remain. Note: Knight = Free, Jack = 11, Queen = 12, King = 13, Joker = 0");
         panel.add(statusMsg);
         statusMsg.setBounds(LABEL_LEFT, LABEL_TOP, 250, 30);
 
@@ -230,58 +223,7 @@ public class CardGameGUI extends JFrame implements ActionListener {
         winMsg.setVisible(false);
 
         rulesMsg = new JLabel();
-        rulesMsg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 30);
-        rulesMsg.setForeground(Color.BLUE);
-        rulesMsg.setText("Rules: You pick three cards.");
-        panel.add(rulesMsg);
-
-        rules2Msg = new JLabel();
-        rules2Msg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 60);
-        rules2Msg.setForeground(Color.BLUE);
-        rules2Msg.setText("Of these three cards, any two must");
-        panel.add(rules2Msg);
-        
-        rules3Msg = new JLabel();
-        rules3Msg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 90);
-        rules3Msg.setForeground(Color.BLUE);
-        rules3Msg.setText("add, subtract, multiply, divide, or mod");
-        panel.add(rules3Msg);
-                
-        rules4Msg = new JLabel();
-        rules4Msg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 120);
-        rules4Msg.setForeground(Color.BLUE);
-        rules4Msg.setText("to the other one.");
-        panel.add(rules4Msg);
-        
-        points1 = new JLabel();
-        points1.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 150);
-        points1.setForeground(Color.BLUE);
-        points1.setText("Jacks are worth 11 pts, Queens are 12,");
-        panel.add(points1);
-        
-        points2 = new JLabel();
-        points2.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 180);
-        points2.setForeground(Color.BLUE);
-        points2.setText("Kings are 13, Jokers are 0,");
-        panel.add(points2);
-        
-        points3 = new JLabel();
-        points3.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 210);
-        points3.setForeground(Color.BLUE);
-        points3.setText("and Knights are worth nothing.");
-        panel.add(points3);
-        
-        points3 = new JLabel();
-        points3.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 240);
-        points3.setForeground(Color.BLUE);
-        points3.setText("If there is a knight card in your hand,");
-        panel.add(points3);
-        
-        points4 = new JLabel();
-        points4.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 270);
-        points4.setForeground(Color.BLUE);
-        points4.setText("the entire hand can be replaced.");
-        panel.add(points4);
+        rulesMsg.setBounds();
         
         lossMsg = new JLabel();
         lossMsg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 200, 30);
@@ -294,7 +236,7 @@ public class CardGameGUI extends JFrame implements ActionListener {
         totalsMsg = new JLabel("You've won " + totalWins
             + " out of " + totalGames + " games.");
         totalsMsg.setBounds(LABEL_LEFT, LABEL_TOP + 2 * LABEL_HEIGHT_INC,
-                                  250, 300);
+                                  250, 30);
         panel.add(totalsMsg);
 
         if (!board.anotherPlayIsPossible()) {
