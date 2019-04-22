@@ -222,7 +222,7 @@ public class CardGameGUI extends JFrame implements ActionListener {
         statusMsg.setBounds(LABEL_LEFT, LABEL_TOP, 250, 30);
 
         winMsg = new JLabel();
-        winMsg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 200, 30);
+        winMsg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 200, 325);
         winMsg.setFont(new Font("SansSerif", Font.BOLD, 25));
         winMsg.setForeground(Color.GREEN);
         winMsg.setText("You win!");
@@ -284,7 +284,7 @@ public class CardGameGUI extends JFrame implements ActionListener {
         panel.add(points4);
         
         lossMsg = new JLabel();
-        lossMsg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 200, 30);
+        lossMsg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 200, 325);
         lossMsg.setFont(new Font("SanSerif", Font.BOLD, 25));
         lossMsg.setForeground(Color.RED);
         lossMsg.setText("Sorry, you lose.");
