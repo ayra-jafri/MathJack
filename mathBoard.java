@@ -6,6 +6,8 @@ import java.util.ArrayList;
  */
 public class mathBoard extends Board {
 
+    variableWrap varWrap;
+    
     /**
      * The size (number of cards) on the board.
      */
@@ -23,6 +25,7 @@ public class mathBoard extends Board {
     private static final String[] SUITS =
         {"spades", "hearts", "diamonds", "clubs"};
 
+        
     /**
      * The values of the cards for this game to be sent to the deck.
      */
@@ -34,14 +37,16 @@ public class mathBoard extends Board {
      */
     private static final boolean I_AM_DEBUGGING = false;
 
-
+    private String cardsPlayed;
+    
     /**
      * Creates a new <code>ThirteensBoard</code> instance.
      */
      public mathBoard() {
         super(BOARD_SIZE, RANKS, SUITS, POINT_VALUES);
-     }
-
+        varWrap = new variableWrap();
+    }
+    
     /**
      * Determines if the selected cards form a valid group for removal.
      * In Thirteens, the legal groups are (1) a pair of non-face cards
@@ -95,6 +100,8 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k1));
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
+                        varWrap.setTrue();
+                        varWrap.updateCards("You had a knight in your hand.");
                         return foundIndexes;
                     
                 }
@@ -180,6 +187,7 @@ public class mathBoard extends Board {
                 if(cardAt(k3).pointValue() == 0 
                 && cardAt(k2).pointValue() == 0
                 && cardAt(k1).pointValue() == 0){
+                    varWrap.updateCards("Nope.");
                     return foundIndexes;
                 }
                 
@@ -240,6 +248,7 @@ public class mathBoard extends Board {
                }
             }
         }
+        varWrap.updateCards("Nope.");
         return foundIndexes;
     }
     /*
@@ -290,6 +299,7 @@ public class mathBoard extends Board {
             return false;
         }
     }
+    
     /*
     /**
      * Looks for a King.

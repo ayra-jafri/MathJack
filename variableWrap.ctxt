@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=variableWrap
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ variableWrap\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=variableWrap()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ variableWrap\r\n
+comment2.params=cards
+comment2.target=void\ updateCards(java.lang.String)
+comment3.params=
+comment3.target=void\ setFalse()
+comment4.params=
+comment4.target=void\ setTrue()
+comment5.params=
+comment5.target=boolean\ getFirst()
+comment6.params=
+comment6.target=java.lang.String\ getCardPlayed()
+numComments=7

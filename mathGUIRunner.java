@@ -9,6 +9,7 @@ public class mathGUIRunner {
 	 */
 	public static void main(String[] args) {
 		Board board = new mathBoard();
+		
 		CardGameGUI gui = new CardGameGUI(board);
 		gui.displayGame();
 	}
