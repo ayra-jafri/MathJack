@@ -93,6 +93,7 @@ public class CardGameGUI extends JFrame implements ActionListener{
     private JLabel points2;
     private JLabel points3;
     private JLabel points4;
+    private JLabel points5;
     
     private JLabel cardPlayy;
     
@@ -220,6 +221,7 @@ public class CardGameGUI extends JFrame implements ActionListener{
             displayCards[k].addMouseListener(new MyMouseListener());
             selections[k] = false;
         }
+       
         darkMode = new JButton();
         darkMode.setText("Dark Mode");
         panel.add(darkMode);
@@ -238,7 +240,6 @@ public class CardGameGUI extends JFrame implements ActionListener{
         restartButton.setBounds(BUTTON_LEFT, BUTTON_TOP + BUTTON_HEIGHT_INC,
                                         100, 30);
         restartButton.addActionListener(this);
-
         
         statusMsg = new JLabel();
         if(varWrap.getDark() == true){
@@ -302,21 +303,21 @@ public class CardGameGUI extends JFrame implements ActionListener{
         points3.setText("and Knights are worth nothing.");
         panel.add(points3);
         
-        points3 = new JLabel();
-        points3.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 240);
-        points3.setForeground(Color.BLUE);
-        points3.setText("If there is a knight card in your hand,");
-        panel.add(points3);
-        
         points4 = new JLabel();
-        points4.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 270);
+        points4.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 240);
         points4.setForeground(Color.BLUE);
-        points4.setText("the entire hand can be replaced.");
+        points4.setText("If there is a knight card in your hand,");
         panel.add(points4);
+        
+        points5 = new JLabel();
+        points5.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 270);
+        points5.setForeground(Color.BLUE);
+        points5.setText("the entire hand can be replaced.");
+        panel.add(points5);
         
         cardPlayy = new JLabel();
         cardPlayy.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 320);
-        cardPlayy.setFont(new Font("SanSerif", Font.BOLD, 25));
+        cardPlayy.setFont(new Font("SanSerif", Font.BOLD, 15));
         cardPlayy.setForeground(Color.BLACK);
         if(varWrap.getFirst() == false){
             cardPlayy.setText("No cards played.");
@@ -433,6 +434,15 @@ public class CardGameGUI extends JFrame implements ActionListener{
                 statusMsg.setForeground(Color.white);
                 totalsMsg.setForeground(Color.white);
                 cardPlayy.setForeground(Color.white);
+                rulesMsg.setForeground(Color.cyan);
+                rules2Msg.setForeground(Color.cyan);
+                rules3Msg.setForeground(Color.cyan);
+                rules4Msg.setForeground(Color.cyan);
+                points1.setForeground(Color.cyan);
+                points2.setForeground(Color.cyan);
+                points3.setForeground(Color.cyan);
+                points4.setForeground(Color.cyan);
+                points5.setForeground(Color.cyan);
                 panel.setBackground(Color.black);
             }
             else if(varWrap.getDark() == true){
@@ -440,6 +450,15 @@ public class CardGameGUI extends JFrame implements ActionListener{
                 statusMsg.setForeground(Color.black);
                 totalsMsg.setForeground(Color.black);
                 cardPlayy.setForeground(Color.black);
+                rulesMsg.setForeground(Color.blue);
+                rules2Msg.setForeground(Color.blue);
+                rules3Msg.setForeground(Color.blue);
+                rules4Msg.setForeground(Color.blue);
+                points1.setForeground(Color.blue);
+                points2.setForeground(Color.blue);
+                points3.setForeground(Color.blue);
+                points4.setForeground(Color.blue);
+                points5.setForeground(Color.blue);
                 panel.setBackground(Color.white);
             }
         } else {
