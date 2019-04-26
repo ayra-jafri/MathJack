@@ -1,4 +1,4 @@
-;import java.awt.Point;
+import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -210,7 +210,7 @@ public class CardGameGUI extends JFrame implements ActionListener{
         this.setSize(new Dimension(DEFAULT_WIDTH, height));
         panel.setLayout(null);
         panel.setPreferredSize(
-            new Dimension(DEFAULT_WIDTH - 20, height - 20));
+        new Dimension(DEFAULT_WIDTH - 20, height - 20));
         displayCards = new JLabel[board.size()];
         for (int k = 0; k < board.size(); k++) {
             displayCards[k] = new JLabel();
@@ -239,8 +239,15 @@ public class CardGameGUI extends JFrame implements ActionListener{
                                         100, 30);
         restartButton.addActionListener(this);
 
-        statusMsg = new JLabel(board.deckSize() + " undealt cards remain.");
-        if(varWrap.getDark() == true){setForeground(Color.gray);}
+        
+        statusMsg = new JLabel();
+        if(varWrap.getDark() == true){
+            statusMsg.setForeground(Color.white);
+        }  
+        else if(varWrap.getDark() == false){
+            statusMsg.setForeground(Color.black);
+        }
+        statusMsg.setText(board.deckSize() + " undealt cards remain.");
         panel.add(statusMsg);
         statusMsg.setBounds(LABEL_LEFT, LABEL_TOP, 250, 30);
 
@@ -308,7 +315,7 @@ public class CardGameGUI extends JFrame implements ActionListener{
         panel.add(points4);
         
         cardPlayy = new JLabel();
-        cardPlayy.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 315);
+        cardPlayy.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 320);
         cardPlayy.setFont(new Font("SanSerif", Font.BOLD, 25));
         cardPlayy.setForeground(Color.BLACK);
         if(varWrap.getFirst() == false){
@@ -327,10 +334,12 @@ public class CardGameGUI extends JFrame implements ActionListener{
         panel.add(lossMsg);
         lossMsg.setVisible(false);
 
-        totalsMsg = new JLabel("You've won " + totalWins
+        totalsMsg = new JLabel();
+        totalsMsg.setForeground(Color.black);
+        totalsMsg.setText("You've won " + totalWins
             + " out of " + totalGames + " games.");
         totalsMsg.setBounds(LABEL_LEFT, LABEL_TOP + 2 * LABEL_HEIGHT_INC,
-                                  250, 300);
+                                  250, 325);
         panel.add(totalsMsg);
 
         if (!board.anotherPlayIsPossible()) {
@@ -421,10 +430,16 @@ public class CardGameGUI extends JFrame implements ActionListener{
         } else if (e.getSource().equals(darkMode)) {
             if(varWrap.getDark() == false){
                 varWrap.setDarkOn();
+                statusMsg.setForeground(Color.white);
+                totalsMsg.setForeground(Color.white);
+                cardPlayy.setForeground(Color.white);
                 panel.setBackground(Color.black);
             }
             else if(varWrap.getDark() == true){
                 varWrap.setDarkOff();
+                statusMsg.setForeground(Color.black);
+                totalsMsg.setForeground(Color.black);
+                cardPlayy.setForeground(Color.black);
                 panel.setBackground(Color.white);
             }
         } else {
