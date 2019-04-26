@@ -134,6 +134,7 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k1));
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You played a " + cardAt(k1).pointValue() + ", " + cardAt(k2).pointValue() + ", and a " + cardAt(k3).pointValue()+ ".");
                         return foundIndexes;
                     }
                 }
@@ -156,6 +157,7 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k1));
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You played a " + cardAt(k1).pointValue() + ", " + cardAt(k2).pointValue() + ", and a " + cardAt(k3).pointValue()+ ".");
                         return foundIndexes;
                     }
                     if(cardAt(k1).pointValue() != 0)
@@ -164,6 +166,7 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k1));
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You played a " + cardAt(k1).pointValue() + ", " + cardAt(k2).pointValue() + ", and a " + cardAt(k3).pointValue()+ ".");
                         return foundIndexes;
                        }
                     if(cardAt(k2).pointValue() != 0)
@@ -172,6 +175,7 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k1));
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You played a " + cardAt(k1).pointValue() + ", " + cardAt(k2).pointValue() + ", and a " + cardAt(k3).pointValue()+ ".");
                         return foundIndexes;
                        }
                     if(cardAt(k3).pointValue() != 0)
@@ -180,6 +184,7 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k1));
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You played a " + cardAt(k1).pointValue() + ", " + cardAt(k2).pointValue() + ", and a " + cardAt(k3).pointValue()+ ".");
                         return foundIndexes;
                        }
                 }
@@ -209,6 +214,7 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k1));
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You played a " + cardAt(k1).pointValue() + ", " + cardAt(k2).pointValue() + ", and a " + cardAt(k3).pointValue()+ ".");
                         return foundIndexes;
                     }
                     if(cardAt(k1).pointValue() == 0){
@@ -219,6 +225,7 @@ public class mathBoard extends Board {
                             foundIndexes.add(new Integer(k1));
                             foundIndexes.add(new Integer(k2));
                             foundIndexes.add(new Integer(k3));
+                            varWrap.updateCards("You played a " + cardAt(k1).pointValue() + ", " + cardAt(k2).pointValue() + ", and a " + cardAt(k3).pointValue()+ ".");
                             return foundIndexes;
                        }
                     }
@@ -230,6 +237,7 @@ public class mathBoard extends Board {
                             foundIndexes.add(new Integer(k1));
                             foundIndexes.add(new Integer(k2));
                             foundIndexes.add(new Integer(k3));
+                            varWrap.updateCards("You played a " + cardAt(k1).pointValue() + ", " + cardAt(k2).pointValue() + ", and a " + cardAt(k3).pointValue()+ ".");
                             return foundIndexes;
                        }
                     }
@@ -241,6 +249,7 @@ public class mathBoard extends Board {
                             foundIndexes.add(new Integer(k1));
                             foundIndexes.add(new Integer(k2));
                             foundIndexes.add(new Integer(k3));
+                            varWrap.updateCards("You played a " + cardAt(k1).pointValue() + ", " + cardAt(k2).pointValue() + ", and a " + cardAt(k3).pointValue()+ ".");
                             return foundIndexes;
                        }
                     }

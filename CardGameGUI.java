@@ -1,4 +1,4 @@
-import java.awt.Point;
+;import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -70,6 +70,9 @@ public class CardGameGUI extends JFrame implements ActionListener{
     private JButton replaceButton;
     /** The Restart button. */
     private JButton restartButton;
+    
+    private JButton darkMode;
+    
     /** The "number of undealt cards remain" message. */
     private JLabel statusMsg;
     /** The "you've won n out of m games" message. */
@@ -104,6 +107,7 @@ public class CardGameGUI extends JFrame implements ActionListener{
     private int totalGames;
 
 
+    
     /**
      * Initialize the GUI.
      * @param gameBoard is a <code>Board</code> subclass.
@@ -112,7 +116,7 @@ public class CardGameGUI extends JFrame implements ActionListener{
         board = gameBoard;
         totalWins = 0;
         totalGames = 0;
-
+        
         // Initialize cardCoords using 5 cards per row
         cardCoords = new Point[board.size()];
         int x = LAYOUT_LEFT;
@@ -178,7 +182,10 @@ public class CardGameGUI extends JFrame implements ActionListener{
         panel = new JPanel() {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
+                if(varWrap.getDark() == true){setBackground(Color.black);}
+                else if(varWrap.getDark() == false){setBackground(Color.white);}
             }
+            
         };
 
         // If board object's class name follows the standard format
@@ -213,6 +220,12 @@ public class CardGameGUI extends JFrame implements ActionListener{
             displayCards[k].addMouseListener(new MyMouseListener());
             selections[k] = false;
         }
+        darkMode = new JButton();
+        darkMode.setText("Dark Mode");
+        panel.add(darkMode);
+        darkMode.setBounds(BUTTON_LEFT, BUTTON_TOP + 2 * BUTTON_HEIGHT_INC, 100, 30);
+        darkMode.addActionListener(this);
+        
         replaceButton = new JButton();
         replaceButton.setText("Replace");
         panel.add(replaceButton);
@@ -227,6 +240,7 @@ public class CardGameGUI extends JFrame implements ActionListener{
         restartButton.addActionListener(this);
 
         statusMsg = new JLabel(board.deckSize() + " undealt cards remain.");
+        if(varWrap.getDark() == true){setForeground(Color.gray);}
         panel.add(statusMsg);
         statusMsg.setBounds(LABEL_LEFT, LABEL_TOP, 250, 30);
 
@@ -249,32 +263,20 @@ public class CardGameGUI extends JFrame implements ActionListener{
         rules2Msg.setForeground(Color.BLUE);
         rules2Msg.setText("Of these three cards, any two must");
         panel.add(rules2Msg);
-         /*
+        
+        
         rules3Msg = new JLabel();
         rules3Msg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 90);
         rules3Msg.setForeground(Color.BLUE);
         rules3Msg.setText("add, subtract, multiply, divide, or mod");
         panel.add(rules3Msg);
-           */   
-          
-        cardPlayy = new JLabel();
-        cardPlayy.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 90);
-        cardPlayy.setForeground(Color.BLUE);
-        if(varWrap.getFirst() == false){
-        cardPlayy.setText("No cards played.");
-    }  
-    else if(varWrap.getFirst() == true){
-        cardPlayy.setText(varWrap.getCardPlayed());
-    }
-        panel.add(cardPlayy);
-          
           
         rules4Msg = new JLabel();
         rules4Msg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 120);
         rules4Msg.setForeground(Color.BLUE);
         rules4Msg.setText("to the other one.");
         panel.add(rules4Msg);
-        
+       
         points1 = new JLabel();
         points1.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 150);
         points1.setForeground(Color.BLUE);
@@ -304,6 +306,18 @@ public class CardGameGUI extends JFrame implements ActionListener{
         points4.setForeground(Color.BLUE);
         points4.setText("the entire hand can be replaced.");
         panel.add(points4);
+        
+        cardPlayy = new JLabel();
+        cardPlayy.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 315);
+        cardPlayy.setFont(new Font("SanSerif", Font.BOLD, 25));
+        cardPlayy.setForeground(Color.BLACK);
+        if(varWrap.getFirst() == false){
+            cardPlayy.setText("No cards played.");
+        }  
+        else if(varWrap.getFirst() == true){
+            cardPlayy.setText(varWrap.getCardPlayed());
+        }
+        panel.add(cardPlayy);
         
         lossMsg = new JLabel();
         lossMsg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 200, 325);
@@ -404,6 +418,15 @@ public class CardGameGUI extends JFrame implements ActionListener{
                 selections[i] = false;
             }
             repaint();
+        } else if (e.getSource().equals(darkMode)) {
+            if(varWrap.getDark() == false){
+                varWrap.setDarkOn();
+                panel.setBackground(Color.black);
+            }
+            else if(varWrap.getDark() == true){
+                varWrap.setDarkOff();
+                panel.setBackground(Color.white);
+            }
         } else {
             signalError();
             return;

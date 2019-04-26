@@ -10,6 +10,7 @@ public class variableWrap
     // instance variables - replace the example below with your own
     public static volatile String cardPlayed;
     public static volatile boolean firstCard = false;
+    public static volatile boolean darkModeOn = false;
     /**
      * Constructor for objects of class variableWrap
      */
@@ -24,6 +25,10 @@ public class variableWrap
     public void setFalse(){firstCard = false;}
     public void setTrue(){firstCard = true;}
     public boolean getFirst(){return firstCard;}
+    
+    public void setDarkOff(){darkModeOn = false;}
+    public void setDarkOn(){darkModeOn = true;}
+    public boolean getDark(){return darkModeOn;}
     
     public String getCardPlayed(){return cardPlayed;}
 }
