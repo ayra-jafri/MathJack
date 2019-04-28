@@ -20,8 +20,15 @@ import java.util.ArrayList;
 /**
  * This class provides a GUI for solitaire games related to Elevens.
  */
-public class CardGameGUI extends JFrame implements ActionListener {
+public class CardGameGUI extends JFrame implements ActionListener{
 
+    variableWrap varWrap = new variableWrap();
+
+    CardGameGUI(){ 
+        super();
+        varWrap = new variableWrap();
+    }
+    
     /** Height of the game frame. */
     private static final int DEFAULT_HEIGHT = 302;
     /** Width of the game frame. */
@@ -83,6 +90,8 @@ public class CardGameGUI extends JFrame implements ActionListener {
     private JLabel points2;
     private JLabel points3;
     private JLabel points4;
+    
+    private JLabel cardPlayy;
     
     /** The coordinates of the card displays. */
     private Point[] cardCoords;
@@ -240,13 +249,21 @@ public class CardGameGUI extends JFrame implements ActionListener {
         rules2Msg.setForeground(Color.BLUE);
         rules2Msg.setText("Of these three cards, any two must");
         panel.add(rules2Msg);
-        
+         /*
         rules3Msg = new JLabel();
         rules3Msg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 90);
         rules3Msg.setForeground(Color.BLUE);
         rules3Msg.setText("add, subtract, multiply, divide, or mod");
         panel.add(rules3Msg);
-                
+           */   
+          
+        cardPlayy = new JLabel();
+        cardPlayy.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 90);
+        cardPlayy.setForeground(Color.BLUE);
+
+        panel.add(cardPlayy);
+          
+          
         rules4Msg = new JLabel();
         rules4Msg.setBounds(LABEL_LEFT, LABEL_TOP + LABEL_HEIGHT_INC, 255, 120);
         rules4Msg.setForeground(Color.BLUE);
@@ -362,6 +379,7 @@ public class CardGameGUI extends JFrame implements ActionListener {
             }
             // Do the replace.
             board.replaceSelectedCards(selection);
+            cardPlayy.setText(varWrap.getCardPlayed());
             if (board.isEmpty()) {
                 signalWin();
             } else if (!board.anotherPlayIsPossible()) {
@@ -388,71 +406,73 @@ public class CardGameGUI extends JFrame implements ActionListener {
     }
 
     /**
-	 */
-	private void signalWin() {
-		getRootPane().setDefaultButton(restartButton);
-		winMsg.setVisible(true);
-		totalWins++;
-		totalGames++;
-	}
+     */
+    private void signalWin() {
+        getRootPane().setDefaultButton(restartButton);
+        winMsg.setVisible(true);
+        totalWins++;
+        totalGames++;
+    }
 
-	/**
-	 * Display a loss.
-	 */
-	private void signalLoss() {
-		getRootPane().setDefaultButton(restartButton);
-		lossMsg.setVisible(true);
-		totalGames++;
-	}
+    /**
+     * Display a loss.
+     */
+    private void signalLoss() {
+        getRootPane().setDefaultButton(restartButton);
+        lossMsg.setVisible(true);
+        totalGames++;
+    }
 
-	/**
-	 * Receives and handles mouse clicks.  Other mouse events are ignored.
-	 */
-	private class MyMouseListener implements MouseListener {
+    /**
+     * Receives and handles mouse clicks.  Other mouse events are ignored.
+     */
+    private class MyMouseListener implements MouseListener {
 
-		/**
-		 * Handle a mouse click on a card by toggling its "selected" property.
-		 * Each card is represented as a label.
-		 * @param e the mouse event.
-		 */
-		public void mouseClicked(MouseEvent e) {
-			for (int k = 0; k < board.size(); k++) {
-				if (e.getSource().equals(displayCards[k])
-						&& board.cardAt(k) != null) {
-					selections[k] = !selections[k];
-					repaint();
-					return;
-				}
-			}
-			signalError();
-		}
+        /**
+         * Handle a mouse click on a card by toggling its "selected" property.
+         * Each card is represented as a label.
+         * @param e the mouse event.
+         */
+        public void mouseClicked(MouseEvent e) {
+            for (int k = 0; k < board.size(); k++) {
+                if (e.getSource().equals(displayCards[k])
+                        && board.cardAt(k) != null) {
+                    selections[k] = !selections[k];
+                    varWrap.addSelected(board.cardAt(k));
+                    repaint();
+                    return;
+                    
+                }
+            }
+            signalError();
+        }
 
-		/**
-		 * Ignore a mouse exited event.
-		 * @param e the mouse event.
-		 */
-		public void mouseExited(MouseEvent e) {
-		}
+        /**
+         * Ignore a mouse exited event.
+         * @param e the mouse event.
+         */
+        public void mouseExited(MouseEvent e) {
+        }
 
-		/**
-		 * Ignore a mouse released event.
-		 * @param e the mouse event.
-		 */
-		public void mouseReleased(MouseEvent e) {
-		}
+        /**
+         * Ignore a mouse released event.
+         * @param e the mouse event.
+         */
+        public void mouseReleased(MouseEvent e) {
+        }
 
-		/**
-		 * Ignore a mouse entered event.
-		 * @param e the mouse event.
-		 */
-		public void mouseEntered(MouseEvent e) {
-		}
+        /**
+         * Ignore a mouse entered event.
+         * @param e the mouse event.
+         */
+        public void mouseEntered(MouseEvent e) {
+        }
 
-		/**
-		 * Ignore a mouse pressed event.
-		 * @param e the mouse event.
-		 */
-		public void mousePressed(MouseEvent e) {
-		}
-	}
+        /**
+         * Ignore a mouse pressed event.
+         * @param e the mouse event.
+         */
+        public void mousePressed(MouseEvent e) {
+        }
+    }
 }

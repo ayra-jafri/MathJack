@@ -6,6 +6,8 @@ import java.util.ArrayList;
  */
 public class mathBoard extends Board {
 
+    variableWrap varWrap;
+    
     /**
      * The size (number of cards) on the board.
      */
@@ -23,6 +25,7 @@ public class mathBoard extends Board {
     private static final String[] SUITS =
         {"spades", "hearts", "diamonds", "clubs"};
 
+        
     /**
      * The values of the cards for this game to be sent to the deck.
      */
@@ -34,14 +37,16 @@ public class mathBoard extends Board {
      */
     private static final boolean I_AM_DEBUGGING = false;
 
-
+    private String cardsPlayed;
+    
     /**
      * Creates a new <code>ThirteensBoard</code> instance.
      */
      public mathBoard() {
         super(BOARD_SIZE, RANKS, SUITS, POINT_VALUES);
-     }
-
+        varWrap = new variableWrap();
+    }
+    
     /**
      * Determines if the selected cards form a valid group for removal.
      * In Thirteens, the legal groups are (1) a pair of non-face cards
@@ -81,20 +86,26 @@ public class mathBoard extends Board {
      * @return a list of the indexes of an 13-pair, if an 13-pair was found;
      *         an empty list, if an 13-pair was not found.
      */
-    private List<Integer> findPairSum(List<Integer> selectedCards) {
+    private List<Integer> findPairSum(List<Card> selectedOrder) {
         List<Integer> foundIndexes = new ArrayList<Integer>();
-        for (int sk1 = 0; sk1 < selectedCards.size(); sk1++) {
-            int k1 = selectedCards.get(sk1).intValue();
-            for (int sk2 = sk1 + 1; sk2 < selectedCards.size(); sk2++) {
-                int k2 = selectedCards.get(sk2).intValue();
-                for(int sk3 = sk2 + 1; sk3 < selectedCards.size(); sk3++){
-                int k3 = selectedCards.get(sk3).intValue();
-                if((cardAt(k1).rank().equals("knight")) 
+        
+        for (int sk1 = 0; sk1 < selectedOrder.size(); sk1++) {
+            int k1 = selectedOrder.get(sk1).pointValue();
+            for (int sk2 = sk1 + 1; sk2 < selectedOrder.size(); sk2++) {
+                int k2 = selectedOrder.get(sk2).pointValue();
+                for(int sk3 = sk2 + 1; sk3 < selectedOrder.size(); sk3++){
+                int k3 = selectedOrder.get(sk3).pointValue();
+                if(((cardAt(k1).rank().equals("knight")) 
                 || (cardAt(k2).rank().equals("knight"))
-                ||(cardAt(k3).rank().equals("knight"))){
+                ||(cardAt(k3).rank().equals("knight"))) /*&&
+                ((cardAt(k1).pointValue() == 14) 
+                || (cardAt(k2).pointValue() == 14) 
+                || (cardAt(k3).pointValue() == 14))*/){
                         foundIndexes.add(new Integer(k1));
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
+                        
+                        varWrap.updateCards("You had a knight in your hand.");
                         return foundIndexes;
                     
                 }
@@ -102,6 +113,39 @@ public class mathBoard extends Board {
                 if ((cardAt(k1).pointValue() != 0 
                 && cardAt(k2).pointValue() != 0 
                 && cardAt(k3).pointValue() != 0)) {
+                    if((cardAt(k1).pointValue() + cardAt(k2).pointValue() == cardAt(k3).pointValue())
+                    || (cardAt(k2).pointValue() + cardAt(k1).pointValue() == cardAt(k3).pointValue())){
+                        foundIndexes.add(new Integer(k1));
+                        foundIndexes.add(new Integer(k2));
+                        foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You did " + cardAt(k1).pointValue() + " + " + cardAt(k2).pointValue() + " = " + cardAt(k3).pointValue() + ".");
+                        return foundIndexes;
+                    }
+                    
+                    if(cardAt(k1).pointValue() - cardAt(k2).pointValue() == cardAt(k3).pointValue()){
+                        foundIndexes.add(new Integer(k1));
+                        foundIndexes.add(new Integer(k2));
+                        foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You did " + cardAt(k1).pointValue() + " - " + cardAt(k2).pointValue() + " = " + cardAt(k3).pointValue() + ".");
+                        return foundIndexes;
+                    }
+                    
+                    if(cardAt(k1).pointValue() * cardAt(k2).pointValue() == cardAt(k3).pointValue()){
+                        foundIndexes.add(new Integer(k1));
+                        foundIndexes.add(new Integer(k2));
+                        foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You did " + cardAt(k1).pointValue() + " * " + cardAt(k2).pointValue() + " = " + cardAt(k3).pointValue() + ".");
+                        return foundIndexes;
+                    }
+                    
+                    if((cardAt(k1).pointValue()) / (cardAt(k2).pointValue()) == cardAt(k3).pointValue()){
+                        foundIndexes.add(new Integer(k1));
+                        foundIndexes.add(new Integer(k2));
+                        foundIndexes.add(new Integer(k3));
+                        varWrap.updateCards("You did " + cardAt(k1).pointValue() + " / " + cardAt(k2).pointValue() + " = " + cardAt(k3).pointValue() + ".");
+                        return foundIndexes;
+                    }
+                    /*
                     if((cardAt(k1).pointValue() + cardAt(k2).pointValue() == cardAt(k3).pointValue()) 
                         ||(cardAt(k1).pointValue() + cardAt(k3).pointValue() == cardAt(k2).pointValue())
                         ||(cardAt(k2).pointValue() + cardAt(k3).pointValue() == cardAt(k1).pointValue()
@@ -128,13 +172,13 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
                         return foundIndexes;
-                    }
+                    }*/
                 }
                 
                 if((cardAt(k1).pointValue() == 0 && cardAt(k2).pointValue() == 0 && (cardAt(k3).pointValue() != 0)) 
                 || (cardAt(k2).pointValue() == 0 && cardAt(k3).pointValue() == 0 && (cardAt(k1).pointValue() != 0))
                 ||(cardAt(k1).pointValue() == 0 && cardAt(k3).pointValue() == 0 && (cardAt(k2).pointValue() != 0))){
-                    if(((cardAt(k1).pointValue() + cardAt(k2).pointValue() == cardAt(k3).pointValue())
+                    /*if(((cardAt(k1).pointValue() + cardAt(k2).pointValue() == cardAt(k3).pointValue())
                         ||cardAt(k1).pointValue() + cardAt(k3).pointValue() == cardAt(k2).pointValue())
                         ||(cardAt(k2).pointValue() + cardAt(k3).pointValue() == cardAt(k1).pointValue()
                         
@@ -150,7 +194,7 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
                         return foundIndexes;
-                    }
+                    }*/
                     if(cardAt(k1).pointValue() != 0)
                         if((cardAt(k2).pointValue() % cardAt(k1).pointValue() == 0)
                         || (cardAt(k1).pointValue() / cardAt(k2).pointValue() == 0)){
@@ -180,13 +224,14 @@ public class mathBoard extends Board {
                 if(cardAt(k3).pointValue() == 0 
                 && cardAt(k2).pointValue() == 0
                 && cardAt(k1).pointValue() == 0){
+                    varWrap.updateCards("Nope.");
                     return foundIndexes;
                 }
                 
                 if(((cardAt(k1).pointValue() == 0) && (cardAt(k2).pointValue() != 0) && (cardAt(k3).pointValue() != 0)) 
                 ||((cardAt(k3).pointValue() == 0) && (cardAt(k1).pointValue() != 0) && (cardAt(k2).pointValue() != 0))
                 ||((cardAt(k2).pointValue() == 0) && (cardAt(k3).pointValue() != 0) && (cardAt(k1).pointValue() != 0))){
-                    if(((cardAt(k1).pointValue() + cardAt(k2).pointValue() == cardAt(k3).pointValue())
+                    /*if(((cardAt(k1).pointValue() + cardAt(k2).pointValue() == cardAt(k3).pointValue())
                         ||cardAt(k1).pointValue() + cardAt(k3).pointValue() == cardAt(k2).pointValue())
                         ||(cardAt(k2).pointValue() + cardAt(k3).pointValue() == cardAt(k1).pointValue()
                         
@@ -202,7 +247,9 @@ public class mathBoard extends Board {
                         foundIndexes.add(new Integer(k2));
                         foundIndexes.add(new Integer(k3));
                         return foundIndexes;
-                    }
+                    }*/
+                    
+                    
                     if(cardAt(k1).pointValue() == 0){
                        if((cardAt(k1).pointValue() % cardAt(k2).pointValue() == 0)
                         || (cardAt(k1).pointValue() % cardAt(k3).pointValue() == 0)
@@ -240,6 +287,7 @@ public class mathBoard extends Board {
                }
             }
         }
+        varWrap.updateCards("Nope.");
         return foundIndexes;
     }
     /*
@@ -290,6 +338,7 @@ public class mathBoard extends Board {
             return false;
         }
     }
+    
     /*
     /**
      * Looks for a King.

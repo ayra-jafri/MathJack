@@ -1,0 +1,5 @@
+to add:
+  - make the order in which the cards are chosen matter in determining whether a hand can be replaced or not
+      - requires a rewrite of the logic
+          - make it two seperate game modes?
+  - display what made a card combo legal when a card combo is played
