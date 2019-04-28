@@ -1,4 +1,4 @@
-import java.util.*;
+
 /**
  * Write a description of class variableWrap here.
  *
@@ -9,8 +9,8 @@ public class variableWrap
 {
     // instance variables - replace the example below with your own
     public static volatile String cardPlayed;
-
-    public static volatile List<Card> selectedOrder;
+    public static volatile boolean firstCard = false;
+    public static volatile boolean darkModeOn = false;
     /**
      * Constructor for objects of class variableWrap
      */
@@ -22,10 +22,14 @@ public class variableWrap
         cardPlayed = cards;
     }
     
-    public void addSelected(Card added){selectedOrder.add(added);}
+    //unused (I think)
+    public void setFalse(){firstCard = false;}
+    public void setTrue(){firstCard = true;}
+    public boolean getFirst(){return firstCard;}
     
-    public List<Card> getSelected(){return selectedOrder;}
-
+    public void setDarkOff(){darkModeOn = false;}
+    public void setDarkOn(){darkModeOn = true;}
+    public boolean getDark(){return darkModeOn;}
     
     public String getCardPlayed(){return cardPlayed;}
 }
