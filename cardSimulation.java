@@ -1,11 +1,11 @@
 /**
- * This is a class that simulates games of Thirteens.
- * See accompanying documents for a description of how Thirteens is played.
+ * This is a class that simulates games of MathJack.
+ * See accompanying documents for a description of how MathJack is played.
  */
 public class cardSimulation {
 
 	/**
-	 * The number of games of Thirteens to play.
+	 * The number of games of MathJack to play.
 	 */
 	private static final int GAMES_TO_PLAY = 1000;
 
