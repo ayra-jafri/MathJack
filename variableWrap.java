@@ -2,8 +2,8 @@
 /**
  * Write a description of class variableWrap here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Ayra Jafri
+ * @version 1
  */
 public class variableWrap
 {
