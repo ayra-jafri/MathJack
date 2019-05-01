@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * The ThirteensBoard class represents the board in a game of Thirteens.
+ * The mathBoard class represents the board in a game of Thirteens.
  */
 public class mathBoard extends Board {
 
@@ -40,7 +40,7 @@ public class mathBoard extends Board {
     private String cardsPlayed;
     
     /**
-     * Creates a new <code>ThirteensBoard</code> instance.
+     * Creates a new <code>mathBoard</code> instance.
      */
      public mathBoard() {
         super(BOARD_SIZE, RANKS, SUITS, POINT_VALUES);
@@ -49,8 +49,7 @@ public class mathBoard extends Board {
     
     /**
      * Determines if the selected cards form a valid group for removal.
-     * In Thirteens, the legal groups are (1) a pair of non-face cards
-     * whose values add to 13, and (2) a king.
+     * In MathJack, legal cards are a trio of cards that are mathemtatically related to each other.
      * @param selectedCards the list of the indices of the selected cards.
      * @return true if the selected cards form a valid group for removal;
      *         false otherwise.
@@ -66,8 +65,7 @@ public class mathBoard extends Board {
 
     /**
      * Determine if there are any legal plays left on the board.
-     * In Thirteens, there is a legal play if the board contains
-     * (1) a pair of non-face cards whose values add to 13, or (2) a king.
+     * In MathJack, legal cards are a trio of cards that are mathemtatically related to each other.
      * @return true if there is a legal play left on the board;
      *         false otherwise.
      */
@@ -75,16 +73,15 @@ public class mathBoard extends Board {
     public boolean anotherPlayIsPossible() {
         List<Integer> cIndexes = cardIndexes();
         return findPairSum(cIndexes).size() > 0;
-             /*|| findKing(cIndexes).size() > 0*/
     }
 
     /**
      * Look for an trio sum in the selected cards.
      * @param selectedCards selects a subset of this board.  It is list
      *                      of indexes into this board that are searched
-     *                      to find an 13-pair.
-     * @return a list of the indexes of an 13-pair, if an 13-pair was found;
-     *         an empty list, if an 13-pair was not found.
+     *                      to find a legal pair.
+     * @return a list of the indexes of an mathJack-pair, if a mathJack-pair was found;
+     *         an empty list, if a pair was not found.
      */
     private List<Integer> findPairSum(List<Integer> selectedCards) {
         List<Integer> foundIndexes = new ArrayList<Integer>();
@@ -260,40 +257,20 @@ public class mathBoard extends Board {
         varWrap.updateCards("Nope.");
         return foundIndexes;
     }
-    /*
-    /**
-     * Look for a king in the selected cards.
-     * @param selectedCards selects a subset of this board.  It is list
-     *                      of indexes into this board that are searched
-     *                      to find a king.
-     * @return a list of the index of a king, if a king was found;
-     *         an empty list, if a king was not found.
-     
-    private List<Integer> findKing(List<Integer> selectedCards) {
-        List<Integer> foundIndexes = new ArrayList<Integer>();
-        for (Integer kObj : selectedCards) {
-            int k = kObj.intValue();
-            if (cardAt(k).rank().equals("king")) {
-                foundIndexes.add(new Integer(k));
-                return foundIndexes;
-            }
-        }
-        return foundIndexes;
-    }
-    */
+  
     /**
      * Looks for a legal play on the board.  If one is found, it plays it.
      * @return true if a legal play was found (and made); false othewise.
      */
     public boolean playIfPossible() {
-        return playPairSumIfPossible(); /*|| playKingIfPossible();*/
+        return playPairSumIfPossible();
     }
 
     /**
-     * Looks for a pair of non-face cards whose values sum to 13.
-     * If found, replace them with the next two cards in the deck.
+     * Looks for a pair of non-face cards whose values are mathematically related.
+     * If found, replace them with the next three cards in the deck.
      * The simulation of this game uses this method.
-     * @return true if an 13-pair play was found (and made); false othewise.
+     * @return true if a mathJack-pair play was found (and made); false othewise.
      */
     private boolean playPairSumIfPossible() {
         List<Integer> foundIndexes = cardIndexes();
@@ -308,26 +285,5 @@ public class mathBoard extends Board {
             return false;
         }
     }
-    
-    /*
-    /**
-     * Looks for a King.
-     * If found, replace it with the next card in the deck.
-     * The simulation of this game uses this method.
-     * @return true if a king play was found (and made); false othewise.
-    
-    private boolean playKingIfPossible() {
-        List<Integer> foundIndexes = cardIndexes();
-        List<Integer> cardsToReplace = findKing(foundIndexes);
-        if (cardsToReplace.size() > 0) {
-            replaceSelectedCards(cardsToReplace);
-            if (I_AM_DEBUGGING) {
-                System.out.println("King removed.\n");
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
-    */
+   
 }
