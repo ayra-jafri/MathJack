@@ -7,9 +7,11 @@
  */
 public class variableWrap
 {
-    // instance variables - replace the example below with your own
+    // string that stores which cards have been played
     public static volatile String cardPlayed;
+    // boolean (unused) which tests for whether the first play has been made
     public static volatile boolean firstCard = false;
+    // boolean to set dark mode on and off
     public static volatile boolean darkModeOn = false;
     /**
      * Constructor for objects of class variableWrap
@@ -18,6 +20,8 @@ public class variableWrap
     {
         // initialise instance variables
     }
+    
+    // method to update the cardPlayed variable with new hand
     public void updateCards(String cards){
         cardPlayed = cards;
     }
@@ -27,9 +31,11 @@ public class variableWrap
     public void setTrue(){firstCard = true;}
     public boolean getFirst(){return firstCard;}
     
+    // methods to set Dark Mode on and off, and retrieve the var's value
     public void setDarkOff(){darkModeOn = false;}
     public void setDarkOn(){darkModeOn = true;}
     public boolean getDark(){return darkModeOn;}
     
+    // method to retrieve the cardPlayed variable
     public String getCardPlayed(){return cardPlayed;}
 }
